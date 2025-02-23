@@ -9,23 +9,29 @@
 </head>
 <body>
 	<!-- Header Section -->
-	<header>
-		<div class="container">
-			<h1>Talebul Islam</h1>
-			<p>Software Engineer | Cloud Architect</p>
-			<nav>
-				<ul>
-					<li><a href="#about">About Me</a></li>
-					<li><a href="#certificates">Certificates</a></li>
-					<li><a href="#experience">Experience</a></li>
-					<li><a href="#skills">Skills</a></li>
-					<li><a href="#projects">Find My Work</a></li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <script>
+        function toggleMenu() {
+            document.body.classList.toggle('menu-open');
+        }
+    </script>
+    <nav>
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Find My Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
+    <header>
+        <div class="container">
+            <h1>Talebul Islam</h1>
+            <p>Software Engineer | Cloud Architect</p>
+        </div>
+    </header>
 <!-- About Section -->
 <section id="about" class="section">
     <div class="container">
