@@ -24,17 +24,21 @@ window.addEventListener('scroll', checkVisibility);
 checkVisibility(); // Initial check
 
 
-    // Simulated Live Watching
+    // ✅ Simulated Live Watching (random between 1-15)
     function updateLiveWatching() {
-        const count = Math.floor(Math.random() * 10) + 1;
+        const count = Math.floor(Math.random() * 15) + 1;
         document.getElementById("watching-count").textContent = count;
     }
-    setInterval(updateLiveWatching, 5000);
+    setInterval(updateLiveWatching, 3000);
     updateLiveWatching();
 
-    // Total Visit Count
-    fetch("https://api.countapi.dev/hit/talebulislam.github.io/visits")
+    // ✅ Total Visit Counter using CountAPI (only increments once per load)
+    fetch('https://api.countapi.xyz/hit/talebulislam.github.io')
         .then(res => res.json())
         .then(data => {
             document.getElementById("total-visits").textContent = data.value;
+        })
+        .catch(error => {
+            document.getElementById("total-visits").textContent = "Error";
+            console.error('Visit Counter Error:', error);
         });
