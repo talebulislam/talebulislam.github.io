@@ -2,43 +2,53 @@
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 });
 
-// Scroll Animations
+// Scroll Animation
 const sections = document.querySelectorAll('.section');
 
-const checkVisibility = () => {
+function revealSectionsOnScroll() {
     sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        if (sectionTop < window.innerHeight - 100) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
             section.classList.add('visible');
         }
     });
-};
+}
+window.addEventListener('scroll', revealSectionsOnScroll);
+revealSectionsOnScroll(); // Initial load
 
-window.addEventListener('scroll', checkVisibility);
-checkVisibility(); // Initial check
+// Simulated Live Watching (Random 1-15)
+function updateLiveWatching() {
+  const count = Math.floor(Math.random() * 15) + 1;
+  const el = document.getElementById("watching-count");
+  if (el) el.textContent = count;
+}
+setInterval(updateLiveWatching, 3000);
+updateLiveWatching();
 
-
-    // ✅ Simulated Live Watching (random between 1-15)
-    function updateLiveWatching() {
-        const count = Math.floor(Math.random() * 15) + 1;
-        document.getElementById("watching-count").textContent = count;
+// Animate Counter
+function animateCounter(el, target) {
+  let count = 0;
+  const duration = 1000;
+  const increment = target / (duration / 50);
+  const interval = setInterval(() => {
+    count += increment;
+    if (count >= target) {
+      count = target;
+      clearInterval(interval);
     }
-    setInterval(updateLiveWatching, 3000);
-    updateLiveWatching();
+    el.textContent = Math.floor(count);
+  }, 50);
+}
 
-    // ✅ Total Visit Counter using CountAPI (only increments once per load)
-    fetch('https://api.countapi.xyz/hit/talebulislam.github.io')
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("total-visits").textContent = data.value;
-        })
-        .catch(error => {
-            document.getElementById("total-visits").textContent = "Error";
-            console.error('Visit Counter Error:', error);
-        });
+// API Callback Function for Visit Count
+function updateVisitCount(response) {
+  const el = document.getElementById('total-visits');
+  if (el) animateCounter(el, response.value);
+}
