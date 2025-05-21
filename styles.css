@@ -1,5 +1,4 @@
 /* General Styles */
-/* General Styles */
 body {
     margin: 0;
     padding: 0;
@@ -713,6 +712,29 @@ footer {
 .social-links a:hover {
   color: var(--accent, #00f7ff);
   transform: scale(1.15);
+}
+
+.stats-section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.stat-box {
+  background: rgb(21, 129, 201);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: scale(1.05);
 }
 
 
