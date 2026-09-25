@@ -1,54 +1,107 @@
-// Smooth Scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
+document.body.classList.add("js-ready");
+
+const menuButton = document.querySelector(".menu-toggle");
+const navigation = document.querySelector("#primary-nav");
+const navigationLinks = [
+  ...document.querySelectorAll('#primary-nav a[href^="#"]'),
+];
+const sections = [...document.querySelectorAll(".section")];
+
+function closeMenu() {
+  document.body.classList.remove("menu-open");
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.setAttribute("aria-label", "Open navigation");
+  menuButton.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+}
+
+menuButton.addEventListener("click", () => {
+  const isOpen = document.body.classList.toggle("menu-open");
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+  menuButton.setAttribute(
+    "aria-label",
+    isOpen ? "Close navigation" : "Open navigation",
+  );
+  menuButton.innerHTML = `<i class="fas fa-${isOpen ? "times" : "bars"}" aria-hidden="true"></i>`;
 });
 
-// Scroll Animation
-const sections = document.querySelectorAll('.section');
+navigationLinks.forEach((link) => link.addEventListener("click", closeMenu));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && document.body.classList.contains("menu-open"))
+    closeMenu();
+});
+document.addEventListener("click", (event) => {
+  if (
+    document.body.classList.contains("menu-open") &&
+    !navigation.contains(event.target) &&
+    !event.composedPath().includes(menuButton)
+  )
+    closeMenu();
+});
 
-function revealSectionsOnScroll() {
-    sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-            section.classList.add('visible');
-        }
+const skillCategories = {
+  Angular: "frontend",
+  React: "frontend",
+  ".NET Core": "backend",
+  "C#": "backend",
+  "RESTful APIs": "backend",
+  Microservices: "backend",
+  "Node.js": "backend",
+  "SQL Server": "backend",
+  Azure: "cloud",
+  AWS: "cloud",
+  GCP: "cloud",
+  Docker: "delivery",
+  Kubernetes: "delivery",
+  Git: "delivery",
+  "CI/CD Pipelines": "delivery",
+  "Agile Methodologies": "delivery",
+  "SDLC & Delivery": "delivery",
+};
+
+const skillCards = [...document.querySelectorAll(".skill")];
+skillCards.forEach((card) => {
+  const name = card.querySelector(".skill-name").textContent.trim();
+  card.dataset.category = skillCategories[name] || "delivery";
+});
+
+document.querySelectorAll(".skill-filter").forEach((button) => {
+  button.addEventListener("click", () => {
+    const category = button.dataset.filter;
+    document.querySelectorAll(".skill-filter").forEach((filter) => {
+      filter.setAttribute("aria-pressed", String(filter === button));
     });
-}
-window.addEventListener('scroll', revealSectionsOnScroll);
-revealSectionsOnScroll(); // Initial load
+    skillCards.forEach((card) => {
+      card.hidden = category !== "all" && card.dataset.category !== category;
+    });
+  });
+});
 
-// Simulated Live Watching (Random 1-15)
-function updateLiveWatching() {
-  const count = Math.floor(Math.random() * 15) + 1;
-  const el = document.getElementById("watching-count");
-  if (el) el.textContent = count;
-}
-setInterval(updateLiveWatching, 3000);
-updateLiveWatching();
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08 },
+  );
+  sections.forEach((section) => revealObserver.observe(section));
 
-// Animate Counter
-function animateCounter(el, target) {
-  let count = 0;
-  const duration = 1000;
-  const increment = target / (duration / 50);
-  const interval = setInterval(() => {
-    count += increment;
-    if (count >= target) {
-      count = target;
-      clearInterval(interval);
-    }
-    el.textContent = Math.floor(count);
-  }, 50);
-}
-
-// API Callback Function for Visit Count
-function updateVisitCount(response) {
-  const el = document.getElementById('total-visits');
-  if (el) animateCounter(el, response.value);
+  const navigationObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navigationLinks.forEach((link) => {
+          link.classList.toggle("active", link.hash === `#${entry.target.id}`);
+        });
+      });
+    },
+    { rootMargin: "-25% 0px -65% 0px" },
+  );
+  sections.forEach((section) => navigationObserver.observe(section));
+} else {
+  sections.forEach((section) => section.classList.add("is-visible"));
 }

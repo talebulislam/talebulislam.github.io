@@ -3,20 +3,19 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Talebul Islam - Portfolio</title>
+		<title>Talebul Islam | Software Engineer</title>
 		<link rel="icon" href="images/favicon.ico">
-		<link rel="stylesheet" href="styles.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="portfolio.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<script src="script.js" defer></script>
 	</head>
 	<body>
 		<!-- Header Section -->
-		<button class="menu-toggle" onclick="toggleMenu()">☰</button>
-		<script>
-			function toggleMenu() {
-				document.body.classList.toggle('menu-open');
-			}
-		</script>
-		<nav>
+		<button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav"><i class="fas fa-bars" aria-hidden="true"></i></button>
+		<nav id="primary-nav" aria-label="Primary navigation">
 			<ul>
 				<li><a href="#about">About Me</a></li>
 				<li><a href="#certificates">Certificates</a></li>
@@ -27,22 +26,29 @@
 			</ul>
 		</nav>
 
-		<header>
-		  <div class="container">
-			<h1>TALEBUL ISLAM</h1>
-			<p style="font-weight: bold; font-size: 20px; margin: 0;">Software Engineer | Cloud Enthusiast | Tech Innovator</p>
-			<div class="social-links">
-			  <a href="mailto:talebullislam852218@gmail.com" target="_blank" aria-label="Email">
-				<i class="fas fa-envelope"></i>
-			  </a>
-			  <a href="https://www.linkedin.com/in/talebulislam" target="_blank" aria-label="LinkedIn">
-				<i class="fab fa-linkedin"></i>
-			  </a>
-			  <a href="https://github.com/talebulislam" target="_blank" aria-label="GitHub">
-				<i class="fab fa-github"></i>
-			  </a>
+		<header class="hero" id="top">
+			<div class="hero-grid container">
+				<div class="hero-copy">
+					<p class="eyebrow"><span class="eyebrow-mark"></span> SOFTWARE ENGINEER · HYDERABAD, INDIA</p>
+					<h1>Building software<br>that <span>moves work forward.</span></h1>
+					<p class="hero-summary">I’m Talebul Islam, a full-stack engineer focused on .NET, Angular, cloud platforms, and dependable systems that solve real problems.</p>
+					<div class="hero-actions">
+						<a class="button button-primary" href="#projects">Explore my work <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+						<a class="button button-secondary" href="mailto:talebullislam852218@gmail.com">Get in touch</a>
+					</div>
+					<div class="social-links" aria-label="Social links">
+						<a href="mailto:talebullislam852218@gmail.com" aria-label="Email Talebul"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+						<a href="https://www.linkedin.com/in/talebulislam" target="_blank" rel="noreferrer" aria-label="LinkedIn profile"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+						<a href="https://github.com/talebulislam" target="_blank" rel="noreferrer" aria-label="GitHub profile"><i class="fab fa-github" aria-hidden="true"></i></a>
+					</div>
+				</div>
+				<div class="hero-visual">
+					<div class="hero-photo-frame"><img src="images/profile.jpg" alt="Portrait of Talebul Islam"></div>
+					<div class="hero-caption"><span class="caption-dot"></span><span>Full-stack development<br>Cloud architecture</span></div>
+					<span class="hero-index">01 / 04</span>
+				</div>
 			</div>
-		  </div>
+			<a class="scroll-cue" href="#about"><span>SCROLL TO EXPLORE</span><i class="fas fa-arrow-down" aria-hidden="true"></i></a>
 		</header>
 
 	<!-- About Section -->
@@ -63,7 +69,7 @@
 					</ul>
 				</div>
 				<div class="profile-image-container">
-					<img src="images/profile.jpg" alt="[Your Name]" class="profile-image">
+						<img src="images/profile.jpg" alt="Talebul Islam" class="profile-image">
 				</div>
 			</div>
 		</div>
@@ -226,6 +232,13 @@
 		<section id="skills" class="section">
 			<div class="container">
 				<h2>Skills</h2>
+				<div class="skills-toolbar" role="group" aria-label="Filter skills">
+					<button class="skill-filter" type="button" data-filter="all" aria-pressed="true">All skills</button>
+					<button class="skill-filter" type="button" data-filter="frontend" aria-pressed="false">Frontend</button>
+					<button class="skill-filter" type="button" data-filter="backend" aria-pressed="false">Backend</button>
+					<button class="skill-filter" type="button" data-filter="cloud" aria-pressed="false">Cloud</button>
+					<button class="skill-filter" type="button" data-filter="delivery" aria-pressed="false">Delivery &amp; SDLC</button>
+				</div>
 				<div class="skills-grid">
 					<!-- Front-End Skills -->
 					<div class="skill">
@@ -364,6 +377,18 @@
 							<div class="skill-level" style="width: 85%;"></div>
 						</div>
 					</div>
+					<div class="skill">
+						<div class="skill-icon"><i class="fab fa-react" aria-hidden="true"></i></div>
+						<div class="skill-name">React</div>
+					</div>
+					<div class="skill">
+						<div class="skill-icon"><i class="fab fa-node-js" aria-hidden="true"></i></div>
+						<div class="skill-name">Node.js</div>
+					</div>
+					<div class="skill">
+						<div class="skill-icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></div>
+						<div class="skill-name">SDLC &amp; Delivery</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -380,7 +405,7 @@
 						<h3>AI-Enabled FinTech B2B Invoice Management Application</h3>
 						<p class="date">Jun 2021 - Jul 2021</p>
 						<p>Designed and implemented an invoice management system to track and manage invoices for multiple buyers.</p>
-						<a href="#" class="btn">Read More</a>
+						<a href="https://github.com/talebulislam" class="btn" target="_blank" rel="noreferrer">Explore GitHub <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
 					</div>
 					<div class="project">
 						<div class="project-icon">
@@ -389,7 +414,7 @@
 						<h3>Deploying an Online Doctor’s Clinic Application on Cloud</h3>
 						<p class="date">May 2023 - Jul 2023</p>
 						<p>Deployed the LiveDocApp website on a public cloud platform, implementing load balancing for faster page loading.</p>
-						<a href="#" class="btn">Read More</a>
+						<a href="https://github.com/talebulislam" class="btn" target="_blank" rel="noreferrer">Explore GitHub <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
 					</div>
 				</div>
 			</div>
@@ -413,10 +438,6 @@
 						<i class="fab fa-github"></i>
 						<span>GitHub</span>
 					</a>
-					<a href="https://twitter.com/your-profile" class="contact-link" target="_blank">
-						<i class="fab fa-twitter"></i>
-						<span>Twitter</span>
-					</a>
 				</div>
 			</div>
 		</section>
@@ -424,15 +445,7 @@
 		<!-- Footer -->
 		<footer>
 			<div class="container" style="text-align: center;">
-				<p >&copy; 2025 Talebul Islam. All rights reserved.</p>
-				<div class="stats-section">
-				  <div class="stat-box">
-					👁️ Live Watching: <span id="watching-count">0</span>
-				  </div>
-				  <div class="stat-box">
-					🌐 Total Visits: <span id="total-visits">Loading...</span>
-				  </div>
-				</div>
+				<p>&copy; 2026 Talebul Islam. Built with care.</p>
 				<a href="#top" class="back-to-top">
 					<i class="fas fa-arrow-up"></i>
 				</a>
